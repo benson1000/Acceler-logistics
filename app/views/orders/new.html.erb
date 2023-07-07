@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well">
+        <%= form_for @order,  validate: true do |f| %>
+          <h2 class="text-primary" style="text-align:center; font-size: 35px; color:blue; font-weight: bold;">Place an Order</h2>
+          <% if @order.errors.any? %>
+            <div class="alert alert-danger">
+              <ul>
+                <% @order.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :sender_name, "Sender Name" %>
+            <%= f.text_field :sender_name, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :sender_phone, "Sender Phone Number" %>
+            <%= f.text_field :sender_phone, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :sender_email, "Sender Email" %>
+            <%= f.text_field :sender_email, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :source_location, "Source Location" %>
+            <%= f.text_field :source_location, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :recipient_name, "Recipient Name" %>
+            <%= f.text_field :recipient_name, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :recipient_phone, "Recipient Phone Number" %>
+            <%= f.text_field :recipient_phone, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :recipient_email, "Recipient Email" %>
+            <%= f.text_field :recipient_email, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :destination_location, "Destination Location" %>
+            <%= f.text_field :destination_location, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :services, "Select Services: " %>
+            <% delivery_services = ["Personal Errands", "Corporate Business Errands", "Parcel Pickup and Delivery", "Groceries and Vegetables", "Pharmaceutical Deliveries"] %>
+            <%= f.select :services, options_for_select(delivery_services), { prompt: "Select Service" }, class: "form-control",  multiple: true %>
+          </div>
+          <div class="form-group" style="color:black; font-weight: bold; font-size:15px;">
+            <%= f.label :description, "Description / Instructions" %>
+            <%= f.text_area :description, class: "form-control", validate: { presence: true } %>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit your Order</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //document.querySelector('form').addEventListener('submit', addressFun);
+  //function addressFun(){
+    //document.querySelector('form').action = 'order-success.html';
+  // }
+</script>

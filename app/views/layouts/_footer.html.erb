@@ -1,0 +1,74 @@
+<% if user_signed_in? %>
+  <div class="text-left" style="background-color: rgba(0, 0, 0, 0.6); height: 5rem; align-items: center; color: white; padding-left: 50px;"  >
+    © 2020 Copyright:
+    <%= link_to "panasonic speed logistics", root_path, class: "nav-link" "style= color: 'white';"%>
+  </div>
+<% else %>
+  <footer class="text-center text-lg-start text-dark" style="background-color: #ECEFF1">
+    <section class="work">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+            <h6 class="text-uppercase fw-bold">Panasonic Speed logistics Company</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p>
+              Panasonic Speed Logistics Company, a state-of-the-art delivery service
+              that aims to transform the way your goods are transported. Our advanced tracking
+              systems and extensive network of dependable carriers guarantee exceptionally fast
+              deliveries that go beyond your expectations. Trust us to handle your shipments with
+              utmost care and efficiency, ensuring unmatched convenience.
+            </p>
+          </div>
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold">Delivery Services:</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p>
+              <a href="#" class="text-dark">Pharmaceutical Products</a>
+            </p>
+            <p>
+              <a href="#" class="text-dark">Groceries and Vegetables</a>
+            </p>
+            <p>
+              <a href="#" class="text-dark">Parcel pickup and Delivery</a>
+            </p>
+            <p>
+              <a href="#" class="text-dark">Personal Errands</a>
+            </p>
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold">About US</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p>
+              <%= link_to "About", about_path, class: "nav-link" %>
+            </p>
+            <p>
+              <%= link_to "Contact", new_contact_path, class: "nav-link" %>
+            </p>
+            <p>
+              <%= link_to "Sign Up", new_user_registration_path, method: :get, class: 'nav-link' %>
+            </p>
+            <p>
+              <%= link_to "Log In", new_user_session_path, method: :get, class: 'nav-link' %>
+            </p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold">Nairobi Office</h6>
+            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> Village plaza, along ngara road,Nairobi</p>
+            <p><i class="fa fa-address-card" aria-hidden="true"></i> P.O Box - 49045-00100, Nairobi</p>
+            <p><i class="fa fa-envelope" aria-hidden="true"></i> panasonicspeedlogistics@gmail.com</p>
+            <p><i class="fa fa-phone-square" aria-hidden="true"></i> office: +(254) 798765432</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="text-left" style="background-color: rgba(0, 0, 0, 0.6); height: 5rem; align-items: center; color: white; padding-left: 50px;"  >
+      © 2020 Copyright:
+      <%= link_to "panasonic speed logistics", root_path, class: "nav-link" "style= color: 'white';"%>
+    </div>
+
+  </footer>
+
+<% end %>
