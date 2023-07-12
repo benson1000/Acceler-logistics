@@ -1,0 +1,52 @@
+<h1 class="display-3 text-center" style="color: blue; font-weight: bold;">Payment Details</h1>
+
+<%= form_with(model: @order, validate: true, url: process_payment_path(@order), method: :post) do |form| %>
+  <div class="col-1 col-md-offset-1">
+    <h2 class="display-4">Select Payment Method</h2>
+
+    <div class="form-check">
+      <%= form.radio_button :payment_method, 'credit_card', id: 'credit_card' %>
+      <%= form.label :payment_method_credit_card, "Pay with Credit Card / Master Card" %>
+    </div>
+    <div class="form-check">
+      <%= form.radio_button :payment_method, 'mpesa', id: 'mpesa' %>
+      <%= form.label :payment_method_mpesa, "Pay with M-PESA" %>
+    </div>
+  </div>
+
+  <div id="credit_card_fields" style="display: none;">
+    <%= render 'credit_card_form' %>
+  </div>
+
+  <div id="mpesa_fields" style="display: none;">
+    <div class="form-group">
+      <p class="lead">Business Number: 400200</p>
+      <p class="lead">Account Number: 10000000000</p>
+    </div>
+    <div class="form-group">
+      <%= form.label :mpesa_code, "M-PESA Code" %>
+      <%= form.text_field :mpesa_code, class: "form-control", validate: { presence: true } %>
+    </div>
+  </div>
+<% end %>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const creditCardFields = document.getElementById('credit_card_fields');
+    const mpesaFields = document.getElementById('mpesa_fields');
+    const creditCardRadio = document.getElementById('credit_card');
+    const mpesaRadio = document.getElementById('mpesa');
+
+    creditCardRadio.addEventListener('click', () => {
+      creditCardFields.style.display = 'block';
+      mpesaFields.style.display = 'none';
+    });
+
+    mpesaRadio.addEventListener('click', () => {
+      creditCardFields.style.display = 'none';
+      mpesaFields.style.display = 'block';
+    });
+  });
+</script>
+

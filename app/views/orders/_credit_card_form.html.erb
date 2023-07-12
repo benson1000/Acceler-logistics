@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well">
+        <%= form_with(model: @credit_card, validate: true,  url: process_payment_path(@order), method: :post) do |form| %>
+          <div class="form-group">
+            <%= form.label :email, "Email Address" %>
+            <%= form.text_field :email, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group">
+            <%= form.label :card_number, "Credit Card Number" %>
+            <%= form.text_field :card_number, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <div class="form-group">
+            <%= form.label :expiry_date, "Expiry Date" %>
+            <div class="input-group">
+              <%= form.text_field :expiry_date, class: 'form-control datepicker' %>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i class="fa fa-calendar-alt"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= form.label :cvv, "CVV" %>
+            <%= form.text_field :cvv, class: "form-control" , validate: { presence: true } %>
+          </div>
+          <%= form.submit "Nake Payment", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      startDate: '+2d',
+      autoclose: true
+    });
+  });
+</script>
+
+
+

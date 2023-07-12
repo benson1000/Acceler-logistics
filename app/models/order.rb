@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  belongs_to :user
   validates :sender_name, length: { minimum:3,  maximum:20 }
   validates :sender_phone, numericality: { only_integer: true }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

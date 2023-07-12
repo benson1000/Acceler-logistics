@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   after_create :init_profile
 
+  has_many :orders
+
   #validates :username, uniqueness: { case_sensitive: false }
   # username validations
   validates_presence_of :username
@@ -47,7 +49,7 @@ class User < ApplicationRecord
 
   private
   def init_profile
-    self.build_user_profile(username: self.username, email: self.email)
+    self.build_profile(username: self.username, email: self.email)
   end
 
 end

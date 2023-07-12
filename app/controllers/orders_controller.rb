@@ -1,31 +1,85 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+
   def new
-    @order=Order.new
+    @order=current_user.orders.new
   end
 
   #this is for creating the order.
   def create
-    @order = Order.new(order_params)
-    if @orders.save
+    @order = current_user.orders.new(order_params)
+    @order.status = :ready_for_dispatch # Set the desired status value
+    if @order.save
       # Handle successful order creation, e.g., redirecting to a success page
-      flash[:success] = "Dear #{current_user.username}, Your order has beed received sucessfully. Kindly wait as we process it."
-      #render for payment
+      redirect_to @order
     else
       # Handle failed order creation, e.g., rendering the form with error messages
       flash[:danger] = "Dear #{current_user.username}, your Order has NOT been received."
-      render :new
+      redirect_to new_order_path
     end
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = current_user.orders.find(params[:id])
+    redirect_to order_payment_path(@order)
+  rescue ActiveRecord::RecordNotFound
+    # Handle the case when the order doesn't exist or doesn't belong to the current user
+    flash[:danger] = "Dear, #{current_user.username}, you are not authorized to access this Page."
+    redirect_to order_history_path
+  end
+
+  def order_history
+    @orders = current_user.orders.where.not(status: 'Cancelled')
+  end
+
+  def cancel
+    @order = current_user.orders.find(params[:id])
+    @order.update(status: 'Cancelled')
+    flash[:success] = "The Order has been Successfully cancelled."
+    redirect_to order_path(@order)
+  end
+
+  def cancelled_orders
+    @cancelled_orders = current_user.orders.where(status: 'Cancelled')
+  end
+
+  def payment
+    @order = current_user.orders.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    # Handle the case when the order doesn't exist or doesn't belong to the current user
+    flash[:danger] = "Dear, #{current_user.username}, you are NOT authorized to access another user's Page."
+    redirect_to new_order_path
+  end
+
+  def process_payment
+    @order = current_user.orders.find(params[:id])
+    if params[:order][:payment_method] == 'credit_card'
+      @credit_card = CreditCard.new(credit_card_params)
+      if @credit_card.valid?
+        # Process credit card payment
+        flash[:success] = "Payment successful. Thank you!"
+        redirect_to order_payment_path(@order)
+      else
+        render 'payment'
+      end
+    elsif params[:order][:payment_method] == 'mpesa'
+      # Process M-PESA payment
+      flash[:success] = "Payment successful. Thank you!"
+      redirect_to order_payment_path(@order)
+    else
+      flash[:error] = "Invalid payment method selected."
+      redirect_to order_payment_path(@order)
+    end
   end
 
   private
 
   def order_params
     params.require(:order).permit(:sender_name, :sender_phone, :sender_email, :source_location, :recipient_name, :recipient_phone, :recipient_email, :destination_location, :services, :description)
+  end
+
+  def credit_card_params
+    params.require(:credit_card).permit(:email, :card_number, :expiry_date, :cvv)
   end
 
 end

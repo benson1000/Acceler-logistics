@@ -1,0 +1,53 @@
+<h1 class="display-3 text-center" style="color: blue; font-weight: bold;">Your Order History</h1><br/>
+<div class="table-responsive">
+  <% if @orders.any? %>
+    <table class="table table-dark table-striped-columns table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Order Number</th>
+          <th>Sender Name</th>
+          <th>Sender Phone Number</th>
+          <th>Sender Email</th>
+          <th>Source Location</th>
+          <th>Recipient Name</th>
+          <th>Recipient Phone Number</th>
+          <th>Recipient Email</th>
+          <th>Destination Location</th>
+          <th>Services</th>
+          <th>Description</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.sender_name %></td>
+            <td><%= order.sender_phone %></td>
+            <td><%= order.sender_email %></td>
+            <td><%= order.source_location %></td>
+            <td><%= order.recipient_name %></td>
+            <td><%= order.recipient_phone %></td>
+            <td><%= order.recipient_email %></td>
+            <td><%= order.destination_location %></td>
+            <td><%= order.services %></td>
+            <td><%= order.description %></td>
+            <td><%= order.status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+  <div class="container-fluid">
+      <p class="lead">Dear <%= current_user.username %>, There are No orders linked with this account.</p><br />
+      <p class="lead"> To make an order: <%= link_to "Make an order", new_order_path %></p>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+

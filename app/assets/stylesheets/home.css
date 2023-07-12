@@ -134,83 +134,34 @@
   .text {font-size: 11px}
 }
 
-
-#right{
-  color: white;
-  font-size: 15px;
+#company{
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 8px;
 }
 
-#right:hover{
+#company:hover{
   color: gold;
-}
-#navbarNavDarkDropdown{
-  margin-right: 135px;
-  margin-top: 25px;
-}
-.navbar-nav li a{
-  list-style: none;
-  text-decoration: none;
+  background-color: blue;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-#navbarDropdownMenuLink{
-  color: aqua;
-  font-size: 20px;
-  font-weight: bold !important;
-}
-
-#navbarDropdownMenuLink li{
-  list-style: none;
-  text-decoration: none;
-}
-
-#navbarDropdownMenuLink:hover{
-  color: #ffff;
-}
-
-.dropdown-menu li {
-  list-style: none;
-  text-decoration: none;
-  color: white;
-}
-
-#view {
-  list-style: none;
-  text-decoration: none;
-}
 #view:hover{
   background-color: green;
   color: #ffff;
   font-weight: bold;
 }
 
-
-#profileDropdown{
-  color: white;
-  background-color: gray;
+.heading-order{
+  color: blue;
+  font-weight: bold;
+  font-size: 3.0em;
 }
 
-#profileDropdown {
-  background-color: white;
+.details{
   color: black;
-  margin-top: 20px;
+  background-color: #eee;
 }
-
-#profileDropdown:hover{
-  background-color: blue;
-  color: #ffff;
-  font-weight: bold;
-}
-#account{
-  background-color: black;
-}
-.detail{
-  color: white;
-  font-weight: bold;
-}
-
-.pdetail{
-  text-align: center;
-  align-items: center;
-  position: relative;
-}
-
