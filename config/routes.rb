@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
+  devise_for :companies, controllers: { registrations: 'companies/registrations' }
+  devise_scope :company do
+    get 'companies/sign_up', to: 'companies/registrations#new'
+    post 'companies', to: 'companies/registrations#create'
+  end
+  # Route for company dashboard or profile
+  get '/company', to: 'companies#dashboard', as: 'company'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :companies do
+    resources :orders, only: [:new, :create]
+  end
 
   get '/about', to: 'pages#about'
   resources :contacts
@@ -14,6 +24,8 @@ Rails.application.routes.draw do
   get '/cancelled_orders', to: 'orders#cancelled_orders', as: 'cancelled_orders'
   resources :profiles, only: [:show]
 
+
   # Defines the root path route ("/")
   # root "articles#index"
+
 end

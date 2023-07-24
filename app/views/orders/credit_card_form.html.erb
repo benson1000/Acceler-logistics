@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="well">
+        <%= form_for(@credit_card, url: process_payment_path(@order), method: :post) do |form| %>
+          <% if @credit_card.errors.any? %>
+            <div class="alert alert-danger">
+              <ul>
+                <% @credit_card.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= form.fields_for :credit_card do |cc_form| %>
+            <div class="form-group">
+              <%= cc_form.label :email, "Email Address" %>
+              <%= cc_form.text_field :email, class: "form-control", validate: { presence: true }, placeholder: 'name@example.com'  %>
+            </div>
+            <div class="form-group">
+              <%= cc_form.label :card_number, "Credit Card Number" %>
+              <%= cc_form.text_field :card_number, class: "form-control", placeholder: "XXXX-XXXX-XXXX-XXXX", validate: { presence: true }  %>
+            </div>
+            <div class="form-group">
+              <%= cc_form.label :expiry_date, "Expiry Date" %>
+              <div class="input-group">
+                <%= cc_form.text_field :expiry_date, class: 'form-control datepicker' %>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= cc_form.label :cvv, "CVV" %>
+              <%= cc_form.text_field :cvv, class: "form-control", placeholder: "XXXX", validate: { presence: true } %>
+            </div>
+          <% end %>
+          <%= form.submit "Make Payment", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      startDate: '+2d',
+      autoclose: true
+    });
+  });
+</script>
+
+
+

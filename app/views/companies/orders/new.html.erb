@@ -1,0 +1,41 @@
+<!-- app/views/orders/new.html.erb -->
+<h1>Place an Order</h1>
+
+<%= form_with model: @order, url: orders_path do |form| %>
+  <% if @order.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :pickup_address %>
+    <%= form.text_field :pickup_address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :delivery_address %>
+    <%= form.text_field :delivery_address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :item_description %>
+    <%= form.text_field :item_description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :special_instructions %>
+    <%= form.text_area :special_instructions, class: "form-control" %>
+  </div>
+
+  <%= form.submit "Place Order", class: "btn btn-primary" %>
+<% end %>

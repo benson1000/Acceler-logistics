@@ -38,7 +38,7 @@ gem "turbo-rails"
 #connecting the application with POSTGRESQL
 #gem "pg"
 #connecting the application with mysql
-gem "mysql2"
+#gem "mysql2"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 

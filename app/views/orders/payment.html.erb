@@ -1,6 +1,7 @@
 <h1 class="display-3 text-center" style="color: blue; font-weight: bold;">Payment Details</h1>
 
-<%= form_with(model: @order, validate: true, url: process_payment_path(@order), method: :post) do |form| %>
+<%= form_with(model: @order, validate: true, url: process_payment_path(@order, token: @order.token), method: :post) do |form| %>
+
   <div class="col-1 col-md-offset-1">
     <h2 class="display-4">Select Payment Method</h2>
 
@@ -15,17 +16,26 @@
   </div>
 
   <div id="credit_card_fields" style="display: none;">
-    <%= render 'credit_card_form' %>
+    <%= render template: 'orders/credit_card_form' %>
   </div>
 
-  <div id="mpesa_fields" style="display: none;">
-    <div class="form-group">
-      <p class="lead">Business Number: 400200</p>
-      <p class="lead">Account Number: 10000000000</p>
-    </div>
-    <div class="form-group">
-      <%= form.label :mpesa_code, "M-PESA Code" %>
-      <%= form.text_field :mpesa_code, class: "form-control", validate: { presence: true } %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+          <div class="form-group" id="mpesa_fields" style="display: none;">
+            <br/>
+            <div class="form-group">
+              <p class="lead">Business Number: 400200</p>
+              <p class="lead">Account Number: 10000000000</p>
+            </div>
+            <div class="form-group">
+              <%= form.label :mpesa_code, "M-PESA Code" %>
+              <%= form.text_field :mpesa_code, class: "form-control", validate: { presence: true } %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
